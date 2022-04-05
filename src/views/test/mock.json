@@ -1,0 +1,12 @@
+[
+  {
+    "title": "1. Two Sum",
+    "acceptance": "53.8%",
+    "difficulty": "easy"
+  },
+  {
+    "title": "2. Add Two Numbers",
+    "acceptance": "38.4%",
+    "difficulty": "medium"
+  }
+]
