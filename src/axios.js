@@ -2,9 +2,10 @@
 import axios from 'axios'
 import store from './store'
 import router from './router'
-
+import config from '../config.json'
 //创建 axios 实例
 let instance = axios.create({
+  baseURL: config["backend_address_mock"],
   timeout: 5000, // 请求超过5秒即超时返回错误
   headers: { 'Content-Type': 'application/json;charset=UTF-8' },
 })
@@ -57,10 +58,18 @@ export default {
   },
   // 注册
   userRegister (data) {
+    return instance.post('/register', data)
+  },
+  // 注册
+  userRegister2 (data) {
     return instance.post('/api/register', data)
   },
   // 登录
   userLogin (data) {
+    return instance.post('/login', data)
+  },
+  // 登录
+  userLogin2 (data) {
     return instance.post('/api/login', data)
   },
   // 获取用户列表

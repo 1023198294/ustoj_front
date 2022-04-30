@@ -1,10 +1,12 @@
+const conf = require('./config.json');
+
 module.exports = {
     runtimeCompiler: true,
     publicPath: './', // 设置打包文件相对路径, baseUrl 已被官方不建议使用
 
     devServer: {
         // host: 'localhost',
-        port: 9527,
+        port: conf["front_port"],
         open: process.platform === 'darwin', //配置自动启动浏览器
         https: false,
         hotOnly: false,

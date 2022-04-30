@@ -8,12 +8,12 @@
       <div id="register">
         <p class="title">Vue-Element-Demo</p>
         <el-form
-          :model="ruleForm2"
-          status-icon
-          :rules="rules2"
-          ref="ruleForm2"
-          label-width="0"
-          class="demo-ruleForm"
+            :model="ruleForm2"
+            status-icon
+            :rules="rules2"
+            ref="ruleForm2"
+            label-width="0"
+            class="demo-ruleForm"
         >
           <el-form-item prop="username">
             <el-input v-model="ruleForm2.username" auto-complete="off" placeholder="请输入用户名"></el-input>
@@ -21,10 +21,10 @@
           <el-form-item prop="email">
             <el-input v-model="ruleForm2.email" auto-complete="off" placeholder="请输入邮箱"></el-input>
           </el-form-item>
-          <el-form-item prop="smscode" class="code">
+          <!--el-form-item prop="smscode" class="code">
             <el-input v-model="ruleForm2.smscode" placeholder="验证码"></el-input>
             <el-button type="primary" :disabled='isDisabled' @click="sendCode">{{buttonText}}</el-button>
-          </el-form-item>
+          </el-form-item-->
           <el-form-item prop="pass">
             <el-input type="password" v-model="ruleForm2.pass" auto-complete="off" placeholder="输入密码"></el-input>
           </el-form-item>
@@ -45,6 +45,7 @@
 import axios from '../../axios.js'
 import CryptoJS from 'crypto-js' // md5 加密
 import Loading from '@/components/loading/Loading.vue'
+
 export default {
   name: "Register",
   components: {
@@ -104,18 +105,18 @@ export default {
         smscode: ""
       },
       rules2: {
-        username: [{ validator: checkName, trigger: 'change' }],
-        pass: [{ validator: validatePass, trigger: 'change' }],
-        checkPass: [{ validator: validatePass2, trigger: 'change' }],
-        email: [{ validator: checkTel, trigger: 'change' }],
-        smscode: [{ validator: checkSmscode, trigger: 'change' }],
+        username: [{validator: checkName, trigger: 'change'}],
+        pass: [{validator: validatePass, trigger: 'change'}],
+        checkPass: [{validator: validatePass2, trigger: 'change'}],
+        email: [{validator: checkTel, trigger: 'change'}],
+        smscode: [{validator: checkSmscode, trigger: 'change'}],
       },
       buttonText: '发送验证码',
       isDisabled: false, // 是否禁止点击发送验证码按钮
       flag: true
     }
   },
-  mounted () {
+  mounted() {
     let bgImg = new Image()
     bgImg.src = this.imgUrl
     bgImg.onerror = () => {
@@ -174,14 +175,14 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-
           axios.userRegister({
             username: encodeURIComponent(this.ruleForm2.username),
             password: CryptoJS.MD5(this.ruleForm2.pass).toString(),
             email: this.ruleForm2.email,
-            code: this.ruleForm2.smscode
+            //code: this.ruleForm2.smscode
           }).then((res) => {
             if (res.status === 200) {
+              // console.log(res.data.code)
               if (res.data && res.data.code === 0) {
                 this.$notify({
                   title: '成功',
@@ -249,10 +250,12 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .register-wrapper img {
   position: absolute;
   z-index: 1;
 }
+
 .register-wrapper {
   position: fixed;
   top: 0;
@@ -260,6 +263,7 @@ export default {
   left: 0;
   bottom: 0;
 }
+
 #register {
   max-width: 340px;
   margin: 60px auto;
@@ -269,6 +273,7 @@ export default {
   position: relative;
   z-index: 9;
 }
+
 .title {
   font-size: 26px;
   line-height: 50px;
@@ -276,9 +281,11 @@ export default {
   margin: 10px;
   text-align: center;
 }
+
 .el-form-item {
   text-align: center;
 }
+
 .login {
   margin-top: 10px;
   font-size: 14px;
@@ -289,24 +296,29 @@ export default {
   text-indent: 8px;
   width: 160px;
 }
+
 .login:hover {
   color: #2c2fd6;
 }
+
 .code >>> .el-form-item__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .code button {
   margin-left: 20px;
   width: 140px;
   text-align: center;
 }
+
 .el-button--primary:focus {
   background: #409EFF;
   border-color: #409EFF;
   color: #fff;
 }
+
 @media (max-width: 768px) {
   #register {
     max-width: 260px;

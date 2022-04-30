@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-<!--    <h1 class="title">problem description</h1>-->
+    <!--    <h1 class="title">problem description</h1>-->
     <div style=" width: auto">
       <div style="width: 50%;float: left">
         <el-tabs v-model="cur_name">
@@ -18,7 +18,7 @@
               :key="item.value"
               :label="item.label"
               :value="item.value"
-          :disabled="item.disabled">
+              :disabled="item.disabled">
           </el-option>
         </el-select>
         <el-input
@@ -29,6 +29,7 @@
             style="margin: 10px 0">
         </el-input>
         <el-button type="success" plain style="margin: 5px 0;float: right">submit</el-button>
+        <!--el-button type="success" plain style="margin: 5px 0;float: right">{{this.button_name}}</el-button-->
       </div>
     </div>
   </div>
@@ -37,11 +38,13 @@
 <script>
 import {marked} from "marked";
 import "./markdown.css"
+import Common from "@/components/Common"
 
 export default {
   name: 'Details',
   data() {
     return {
+      backend: Common.name,
       cur_name: 'first',
       lan: '',
       options: [{

@@ -8,12 +8,12 @@
       <div class="login">
         <p class="title">Vue-Element-Demo</p>
         <el-form
-          :model="ruleForm"
-          status-icon
-          :rules="rules"
-          ref="ruleForm"
-          label-width="0"
-          class="demo-ruleForm"
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="ruleForm"
+            label-width="0"
+            class="demo-ruleForm"
         >
           <el-form-item prop="name">
             <el-input v-model="ruleForm.name" auto-complete="off" placeholder="请输入用户名"></el-input>
@@ -32,9 +32,10 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-// import axios from 'axios'
+import {mapMutations} from 'vuex'
 import Loading from '@/components/loading/Loading.vue'
+import axios from "@/axios";
+
 export default {
   name: 'Login',
   components: {
@@ -63,12 +64,12 @@ export default {
         pass: ''
       },
       rules: {
-        name: [{ validator: checkName, trigger: 'change' }],
-        pass: [{ validator: validatePass, trigger: 'change' }],
+        name: [{validator: checkName, trigger: 'change'}],
+        pass: [{validator: validatePass, trigger: 'change'}],
       }
     }
   },
-  mounted () {
+  mounted() {
     let bgImg = new Image()
     bgImg.src = this.imgUrl
     bgImg.onerror = () => {
@@ -86,23 +87,47 @@ export default {
     login(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.bindLogin(this.ruleForm.name)
-          this.saveUser(this.ruleForm.name)
-          this.$notify({
-            title: '成功',
-            message: '恭喜，登录成功。',
-            duration: 1000,
-            type: 'success'
+          axios.userLogin({
+            username: this.ruleForm.name,
+            password: this.ruleForm.pass
+          }).then((res) => {
+            if (res.status === 200) {
+
+              if (res.data && res.data.code === 0) {
+                this.$notify({
+                  title: '成功',
+                  message: '恭喜，登录成功。',
+                  duration: 1000,
+                  type: 'success'
+                })
+                this.bindLogin(this.ruleForm.name)
+                this.saveUser(this.ruleForm.name)
+                setTimeout(() => {
+                  this.$router.push({
+                    path: '/'
+                  })
+                }, 500)
+              } else {
+                this.$notify({
+                  title: '错误',
+                  message: res.data.msg,
+                  duration: 2000,
+                  type: 'error'
+                })
+              }
+            } else {
+              this.$notify({
+                title: '错误',
+                message: `服务器请求出错， 错误码${res.status}`,
+                duration: 2000,
+                type: 'error'
+              })
+            }
           })
-          setTimeout(() => {
-            this.$router.push({
-              path: '/'
-            })
-          }, 500)
         }
       })
     },
-    gotoRegist () {
+    gotoRegist() {
       this.$router.push({
         path: '/register'
       })
@@ -122,6 +147,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .login-wrapper {
   position: fixed;
   top: 0;
@@ -129,10 +155,12 @@ export default {
   left: 0;
   bottom: 0;
 }
+
 .login-wrapper img {
   position: absolute;
   z-index: 1;
 }
+
 .login {
   max-width: 340px;
   margin: 60px auto;
@@ -142,6 +170,7 @@ export default {
   position: relative;
   z-index: 9;
 }
+
 .title {
   font-size: 26px;
   line-height: 50px;
@@ -149,7 +178,8 @@ export default {
   margin: 10px;
   text-align: center;
 }
-#login-form>input {
+
+#login-form > input {
   width: 100%;
   height: 34px;
   display: block;
@@ -161,7 +191,8 @@ export default {
   text-indent: 20px;
   font-size: 14px;
 }
-#login-form>button {
+
+#login-form > button {
   width: 100%;
   height: 34px;
   display: block;
@@ -175,6 +206,7 @@ export default {
   font-size: 16px;
   cursor: pointer;
 }
+
 .register {
   margin-top: 10px;
   font-size: 14px;
@@ -184,9 +216,11 @@ export default {
   cursor: pointer;
   display: inline-block;
 }
+
 .register:hover {
   color: #2c2fd6;
 }
+
 @media (max-width: 768px) {
   .login {
     max-width: 260px;

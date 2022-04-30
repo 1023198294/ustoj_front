@@ -1,8 +1,9 @@
 <template>
   <div class="header">
     <div class="logo" :class="{'is-active':isActive}">
-      <img src="@/assets/logo.png" alt="" height="30px">
-      VueEleDemo
+<!--      <img src="@/assets/logo.png" alt="" height="30px">-->
+      <img src="@/assets/hkust.jpg" alt="" height="30px">
+      USTOJ
     </div>
     <div class="navbar">
       <div class="btn" :class="{'is-active':isActive}" @click="handleMenu">
