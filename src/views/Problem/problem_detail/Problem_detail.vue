@@ -44,7 +44,7 @@ export default {
   name: 'Details',
   data() {
     return {
-      backend: Common.name,
+      backend: Common.addr,
       cur_name: 'first',
       lan: '',
       options: [{

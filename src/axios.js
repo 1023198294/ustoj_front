@@ -76,6 +76,10 @@ export default {
   getAllUser () {
     return instance.get('/api/alluser')
   },
+  // 获取题目
+  getProblems (data) {
+    return instance.get('/problem_list', data)
+  },
   // 删除用户
   delUser (data) {
     return instance.post('/api/deluser', data)

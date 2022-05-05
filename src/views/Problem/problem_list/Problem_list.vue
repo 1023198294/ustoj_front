@@ -72,10 +72,14 @@
 
 <script>
 
+import axios from "@/axios";
+
 export default {
   name: 'Collection',
   data() {
     return {
+      pageNumber:0,
+      pageSize:10,
       tableData: [],
       dialogFormVisible: false,
       newForm: {
@@ -122,10 +126,13 @@ export default {
       })
     },
     handleTest() {
-      var appData = require('./mock.json');
+      const appData = require('./mock.json');
       for (let appDataKey in appData) {
         this.tableData.push(appData[appDataKey])
       }
+    },
+    handleGetProblemList() {
+      axios.getProblems([])
     }
   }
 }

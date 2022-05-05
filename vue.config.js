@@ -1,4 +1,5 @@
-const conf = require('@/components/config/config.json');
+// const conf = require('./components/config/config.json');
+const conf = require("./src/components/config/config.json")
 
 module.exports = {
     runtimeCompiler: true,

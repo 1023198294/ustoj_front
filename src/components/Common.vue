@@ -2,7 +2,7 @@
 import conf from "./config/config.json";
 
 export default {
-  name: conf["backend_address_mock"]
+  addr: conf["backend_address_mock"]
 }
 </script>
 
