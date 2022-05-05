@@ -78,8 +78,8 @@ export default {
   name: 'Collection',
   data() {
     return {
-      pageNumber:0,
-      pageSize:10,
+      pageNumber: 0,
+      pageSize: 10,
       tableData: [],
       dialogFormVisible: false,
       newForm: {
@@ -97,16 +97,15 @@ export default {
     }
   },
   beforeMount() {
-    this.handleTest();
+    this.handleGetProblemList();
   },
   methods: {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
     handleOperate(ele) {
-      console.log(ele)
       this.$router.push({
-        path: '/problem/problem_detail'
+        path: '/problem/problem_detail?problem_id='+ele.id,
       })
     },
     handleDelete() {
@@ -132,7 +131,19 @@ export default {
       }
     },
     handleGetProblemList() {
-      axios.getProblems([])
+      // const appData = require('./mock.json');
+      // for (let appDataKey in appData) {
+      //   this.tableData.push(appData[appDataKey])
+      // }
+      axios.getProblems({
+        "page": this.pageNumber,
+        "page_size": this.pageSize
+      }).then((res) => {
+        // console.log(res.data)
+        for (let i = 0; i < res.data.length; i++) {
+          this.tableData.push(res.data[i])
+        }
+      })
     }
   }
 }
