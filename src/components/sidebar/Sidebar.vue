@@ -13,9 +13,9 @@
         <i class="el-icon-service"></i>
         <span slot="title">Dashboard</span>
       </el-menu-item>
-      <el-menu-item index="/test" >
+      <el-menu-item index="/problem" >
         <i class="el-icon-service"></i>
-        <span slot="title">Test</span>
+        <span slot="title">Problems</span>
       </el-menu-item>
       <el-submenu index="/charts">
         <template slot="title">

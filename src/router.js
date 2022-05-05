@@ -11,11 +11,11 @@ const Slider = () => import(/* webpackChunkName: "dashboard" */ '@/views/charts/
 const Tables = () => import(/* webpackChunkName: "tables" */ '@/views/tables/Tables.vue')
 const List = () => import(/* webpackChunkName: "tables" */ '@/views/tables/list/List.vue')
 const Details = () => import(/* webpackChunkName: "tables" */ '@/views/tables/details/Details.vue')
-const Problem_detail = () => import(/* webpackChunkName: "tables" */ '@/views/test/problem_detail/Problem_detail.vue')
-const Problem_list = () => import(/* webpackChunkName: "tables" */ '@/views/test/problem_list/Problem_list.vue')
+const Problem_detail = () => import(/* webpackChunkName: "tables" */ '@/views/Problem/problem_detail/Problem_detail.vue')
+const Problem_list = () => import(/* webpackChunkName: "tables" */ '@/views/Problem/problem_list/Problem_list.vue')
 const Setting = () => import(/* webpackChunkName: "tables" */ '@/views/setting/Setting.vue')
 const NotFind = () => import(/* webpackChunkName: "home" */ '@/views/404.vue')
-const Test = () => import(/* webpackChunkName: "home" */ '@/views/test/Test')
+const Problems = () => import(/* webpackChunkName: "home" */ '@/views/Problem/Problems')
 Vue.use(Router)
 
 const router = new Router({
@@ -59,18 +59,18 @@ const router = new Router({
                     }
                 },
                 {
-                    path: '/test',
-                    redirect: '/test/problem_list',
-                    name: 'Test',
-                    component: Test,
+                    path: '/problem',
+                    redirect: '/problem/problem_list',
+                    name: 'Problems',
+                    component: Problems,
                     meta: {
-                        breadcrumb: 'test',
-                        title: 'test',
+                        breadcrumb: 'problems',
+                        title: 'problems',
                         requireLogin: true
                     },
                     children: [
                         {
-                            path: '/test/problem_list',
+                            path: '/problem/problem_list',
                             name: 'problem_list',
                             component: Problem_list,
                             meta: {
@@ -80,7 +80,7 @@ const router = new Router({
                             }
                         },
                         {
-                            path: '/test/problem_detail',
+                            path: '/problem/problem_detail',
                             name: 'problem_detail',
                             component: Problem_detail,
                             meta: {

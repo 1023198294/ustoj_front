@@ -102,7 +102,7 @@ export default {
     handleOperate(ele) {
       console.log(ele)
       this.$router.push({
-        path: '/test/problem_detail'
+        path: '/problem/problem_detail'
       })
     },
     handleDelete() {
