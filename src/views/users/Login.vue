@@ -100,7 +100,8 @@ export default {
                   duration: 1000,
                   type: 'success'
                 })
-                this.bindLogin(res.data.token)
+                // this.bindLogin(res.data.token)
+                this.bindLogin(this.ruleForm.name)
                 this.saveUser(this.ruleForm.name)
                 setTimeout(() => {
                   this.$router.push({
