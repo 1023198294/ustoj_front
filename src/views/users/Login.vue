@@ -100,7 +100,7 @@ export default {
                   duration: 1000,
                   type: 'success'
                 })
-                this.bindLogin(this.ruleForm.name)
+                this.bindLogin(res.data.token)
                 this.saveUser(this.ruleForm.name)
                 setTimeout(() => {
                   this.$router.push({
@@ -131,7 +131,7 @@ export default {
       this.$router.push({
         path: '/register'
       })
-    }
+    },
   }
 }
 </script>
