@@ -200,9 +200,13 @@ export default {
           "    pass\n" +
           "\n" +
           "if __name__ == '__main__':\n" +
-          "    tcase = int(input().strip())\n" +
-          "    for case in range(tcase):\n" +
-          "        a, b = map(int, input().strip().split())\n" +
+          "    args = sys.argv[1:]\n" +
+          "    # sample\n" +
+          "    tcase = int(args[0])\n" +
+          "    for i in range(tcase):\n" +
+          "        # a, b = map(int, input().strip().split())\n" +
+          "        a = int(args[i+1])\n" +
+          "        b = int(args[i+2])\n" +
           "        print(a + b)",
       value: '',
       language: '',
@@ -225,8 +229,8 @@ export default {
         this.value = marked(res.data.description)
       } else {
         this.$notify({
-          title:"Error",
-          type:"error",
+          title: "Error",
+          type: "error",
           message: "unable to get problem description, please refresh the page",
           duration: 2000,
 

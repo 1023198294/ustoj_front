@@ -176,8 +176,8 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios.userRegister({
-            username: encodeURIComponent(this.ruleForm2.username),
-            password: CryptoJS.MD5(this.ruleForm2.pass).toString(),
+            username: this.ruleForm2.username,
+            password: this.ruleForm2.pass,
             email: this.ruleForm2.email,
             //code: this.ruleForm2.smscode
           }).then((res) => {
