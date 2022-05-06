@@ -9,33 +9,33 @@
       text-color="#fff"
       active-text-color="#ffd04b"
     >
-      <el-menu-item index="/dashboard" >
-        <i class="el-icon-service"></i>
-        <span slot="title">Dashboard</span>
-      </el-menu-item>
+<!--      <el-menu-item index="/dashboard" >-->
+<!--        <i class="el-icon-service"></i>-->
+<!--        <span slot="title">Dashboard</span>-->
+<!--      </el-menu-item>-->
       <el-menu-item index="/problem" >
-        <i class="el-icon-service"></i>
+        <i class="el-icon-news"></i>
         <span slot="title">Problems</span>
       </el-menu-item>
-      <el-submenu index="/charts">
-        <template slot="title">
-          <i class="el-icon-view"></i>
-          <span slot="title">Charts</span>
-        </template>
-        <el-menu-item index="/charts/diagram">Diagram</el-menu-item>
-        <el-menu-item index="/charts/slider">Slilder</el-menu-item>
-      </el-submenu>
-      <el-submenu index="/tables">
-        <template slot="title">
-          <i class="el-icon-location-outline"></i>
-          <span slot="title">Tables</span>
-        </template>
-        <el-menu-item index="/tables/list">Example</el-menu-item>
-      </el-submenu>
-      <el-menu-item index="/setting" >
-        <i class="el-icon-setting"></i>
-        <span slot="title">Setting</span>
-      </el-menu-item>
+<!--      <el-submenu index="/charts">-->
+<!--        <template slot="title">-->
+<!--          <i class="el-icon-view"></i>-->
+<!--          <span slot="title">Charts</span>-->
+<!--        </template>-->
+<!--        <el-menu-item index="/charts/diagram">Diagram</el-menu-item>-->
+<!--        <el-menu-item index="/charts/slider">Slilder</el-menu-item>-->
+<!--      </el-submenu>-->
+<!--      <el-submenu index="/tables">-->
+<!--        <template slot="title">-->
+<!--          <i class="el-icon-location-outline"></i>-->
+<!--          <span slot="title">Tables</span>-->
+<!--        </template>-->
+<!--        <el-menu-item index="/tables/list">Example</el-menu-item>-->
+<!--      </el-submenu>-->
+<!--      <el-menu-item index="/setting" >-->
+<!--        <i class="el-icon-setting"></i>-->
+<!--        <span slot="title">Setting</span>-->
+<!--      </el-menu-item>-->
     </el-menu>
   </div>
 </template>

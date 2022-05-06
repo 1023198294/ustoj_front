@@ -14,7 +14,7 @@
           {{this.$store.getters.username}}<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item @click.native="logout">退出 </el-dropdown-item>
+          <el-dropdown-item @click.native="logout">logout </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -44,9 +44,9 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout () {
-      this.$confirm('是否退出账户?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Are you sure to logout?', 'reminder', {
+        confirmButtonText: 'confirm',
+        cancelButtonText: 'cancel',
         type: 'warning'
       }).then(() => {
         this.bindLogout()

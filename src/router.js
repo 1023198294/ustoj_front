@@ -5,15 +5,15 @@ import Full from '@/containers/Full'
 // 把下面的路由 作懒加载处理
 const Login = () => import(/* webpackChunkName: "users" */ '@/views/users/Login.vue')
 const Register = () => import(/* webpackChunkName: "users" */ '@/views/users/Register.vue')
-const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/Dashboard.vue')
-const Diagram = () => import(/* webpackChunkName: "charts" */ '@/views/charts/Diagram.vue')
-const Slider = () => import(/* webpackChunkName: "dashboard" */ '@/views/charts/Slider.vue')
-const Tables = () => import(/* webpackChunkName: "tables" */ '@/views/tables/Tables.vue')
-const List = () => import(/* webpackChunkName: "tables" */ '@/views/tables/list/List.vue')
-const Details = () => import(/* webpackChunkName: "tables" */ '@/views/tables/details/Details.vue')
+// const Dashboard = () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/Dashboard.vue')
+// const Diagram = () => import(/* webpackChunkName: "charts" */ '@/views/charts/Diagram.vue')
+// const Slider = () => import(/* webpackChunkName: "dashboard" */ '@/views/charts/Slider.vue')
+// const Tables = () => import(/* webpackChunkName: "tables" */ '@/views/tables/Tables.vue')
+// const List = () => import(/* webpackChunkName: "tables" */ '@/views/tables/list/List.vue')
+// const Details = () => import(/* webpackChunkName: "tables" */ '@/views/tables/details/Details.vue')
 const Problem_detail = () => import(/* webpackChunkName: "tables" */ '@/views/Problem/problem_detail/Problem_detail.vue')
 const Problem_list = () => import(/* webpackChunkName: "tables" */ '@/views/Problem/problem_list/Problem_list.vue')
-const Setting = () => import(/* webpackChunkName: "tables" */ '@/views/setting/Setting.vue')
+// const Setting = () => import(/* webpackChunkName: "tables" */ '@/views/setting/Setting.vue')
 const NotFind = () => import(/* webpackChunkName: "home" */ '@/views/404.vue')
 const Problems = () => import(/* webpackChunkName: "home" */ '@/views/Problem/Problems')
 Vue.use(Router)
@@ -48,16 +48,16 @@ const router = new Router({
                 requireLogin: true
             },
             children: [
-                {
-                    path: '/dashboard',
-                    name: 'Dashboard',
-                    component: Dashboard,
-                    meta: {
-                        breadcrumb: 'dashboard',
-                        title: 'dashboard',
-                        requireLogin: true
-                    }
-                },
+                // {
+                //     path: '/dashboard',
+                //     name: 'Dashboard',
+                //     component: Dashboard,
+                //     meta: {
+                //         breadcrumb: 'dashboard',
+                //         title: 'dashboard',
+                //         requireLogin: true
+                //     }
+                // },
                 {
                     path: '/problem',
                     redirect: '/problem/problem_list',
@@ -75,7 +75,7 @@ const router = new Router({
                             component: Problem_list,
                             meta: {
                                 title: 'list',
-                                breadcrumb: '列表',
+                                breadcrumb: 'list',
                                 requireLogin: true
                             }
                         },
@@ -91,67 +91,67 @@ const router = new Router({
                         }
                     ]
                 },
-                {
-                    path: '/charts/diagram',
-                    name: 'Diagram',
-                    component: Diagram,
-                    meta: {
-                        breadcrumb: '图表一',
-                        title: 'Diagram',
-                        requireLogin: true
-                    }
-                },
-                {
-                    path: '/charts/slider',
-                    name: 'Slider',
-                    component: Slider,
-                    meta: {
-                        breadcrumb: '图表二',
-                        title: 'Slider',
-                        requireLogin: true
-                    }
-                },
-                {
-                    path: '/tables',
-                    redirect: '/tables/list',
-                    name: 'Tables',
-                    component: Tables,
-                    meta: {
-                        breadcrumb: '表格',
-                        requireLogin: true
-                    },
-                    children: [
-                        {
-                            path: '/tables/list',
-                            name: 'List',
-                            component: List,
-                            meta: {
-                                title: 'list',
-                                breadcrumb: '列表',
-                                requireLogin: true
-                            }
-                        },
-                        {
-                            path: '/tables/details',
-                            name: 'Details',
-                            component: Details,
-                            meta: {
-                                title: 'details',
-                                breadcrumb: '详情',
-                                requireLogin: true
-                            }
-                        }
-                    ]
-                },
-                {
-                    path: '/setting',
-                    name: 'Setting',
-                    component: Setting,
-                    meta: {
-                        breadcrumb: '设置',
-                        requireLogin: true
-                    },
-                }
+                // {
+                //     path: '/charts/diagram',
+                //     name: 'Diagram',
+                //     component: Diagram,
+                //     meta: {
+                //         breadcrumb: '图表一',
+                //         title: 'Diagram',
+                //         requireLogin: true
+                //     }
+                // },
+                // {
+                //     path: '/charts/slider',
+                //     name: 'Slider',
+                //     component: Slider,
+                //     meta: {
+                //         breadcrumb: '图表二',
+                //         title: 'Slider',
+                //         requireLogin: true
+                //     }
+                // },
+                // {
+                //     path: '/tables',
+                //     redirect: '/tables/list',
+                //     name: 'Tables',
+                //     component: Tables,
+                //     meta: {
+                //         breadcrumb: 'problem list',
+                //         requireLogin: true
+                //     },
+                //     children: [
+                //         {
+                //             path: '/tables/list',
+                //             name: 'List',
+                //             component: List,
+                //             meta: {
+                //                 title: 'list',
+                //                 breadcrumb: 'problem list',
+                //                 requireLogin: true
+                //             }
+                //         },
+                //         {
+                //             path: '/tables/details',
+                //             name: 'Details',
+                //             component: Details,
+                //             meta: {
+                //                 title: 'details',
+                //                 breadcrumb: '详情',
+                //                 requireLogin: true
+                //             }
+                //         }
+                //     ]
+                // },
+                // {
+                //     path: '/setting',
+                //     name: 'Setting',
+                //     component: Setting,
+                //     meta: {
+                //         breadcrumb: '设置',
+                //         requireLogin: true
+                //     },
+                // }
             ]
         },
         {

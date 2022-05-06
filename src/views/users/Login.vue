@@ -16,14 +16,14 @@
             class="demo-ruleForm"
         >
           <el-form-item prop="name">
-            <el-input v-model="ruleForm.name" auto-complete="off" placeholder="请输入用户名"></el-input>
+            <el-input v-model="ruleForm.name" auto-complete="off" placeholder="username"></el-input>
           </el-form-item>
           <el-form-item prop="pass">
-            <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="输入密码"></el-input>
+            <el-input type="password" v-model="ruleForm.pass" auto-complete="off" placeholder="password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="login('ruleForm')" style="width:100%;">登录</el-button>
-            <p class="register" @click="gotoRegist">没有账户？立即注册</p>
+            <el-button type="primary" @click="login('ruleForm')" style="width:100%;">Login</el-button>
+            <p class="register" @click="gotoRegist">Register now</p>
           </el-form-item>
         </el-form>
       </div>
@@ -44,14 +44,14 @@ export default {
   data() {
     let checkName = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请输入用户名'))
+        callback(new Error('Please input the username'))
       } else {
         callback()
       }
     }
     let validatePass = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("请输入密码"))
+        callback(new Error("Please input the password"))
       } else {
         callback()
       }
