@@ -18,7 +18,7 @@
               >
               </el-table-column>
               <el-table-column
-                  prop="submit_time"
+                  prop="submission_time"
                   label="submit time"
               >
               </el-table-column>
@@ -55,7 +55,9 @@
             style="margin: 10px 0">
 
         </el-input>
-        <el-button type="success" plain style="margin: 5px 0;float: right" @click="handleSubmitCode">submit</el-button>
+        <el-button type="success" plain style="margin: 5px 0;float: right" @click="handleSubmitCode"
+                   :loading="submit_loading">submit
+        </el-button>
         <!--el-button type="success" plain style="margin: 5px 0;float: right">{{this.button_name}}</el-button-->
       </div>
     </div>
@@ -71,19 +73,14 @@ import axios from "@/axios";
 export default {
   name: 'Details',
   methods: {
-    tableRowClassName({row, rowIndex}) {
+    // eslint-disable-next-line no-unused-vars
+    tableRowClassName({row, _}) {
       if (row.status === "running") {
         return 'warning-row'
       } else if (row.status === "wrong answer") {
         return 'fail-row'
       } else if (row.status === "done")
         return 'success-row'
-
-      if (rowIndex === 1) {
-        return 'warning-row';
-      } else if (rowIndex === 3) {
-        return 'success-row';
-      }
       return '';
     },
     handleLanguageChange(language) {
@@ -104,18 +101,53 @@ export default {
       }
       this.submit_loading = true
       axios.getSubmit({
-        "problem_id": this.$route.query.problem_id,
+        "problem_id": parseInt(this.$route.query.problem_id),
         "language": this.language,
         "code": this.textarea
       }).then((res) => {
         if (res) {
-          this.submit_loading = false
+          if (res.status === 200 && res.data && res.data.code === 0) {
+            this.submit_loading = false
+            this.refresh()
+          } else {
+            this.$notify({
+              title: 'Error',
+              message: 'cannot submit the code',
+              duration: 2000,
+              type: "error"
+            })
+            this.submit_loading = false
+          }
         }
       })
+    },
+    refresh() {
+      axios.getResultList({
+        "problem_id": this.$route.query.problem_id,
+      }).then((res) => {
+            if (res && res.status === 200 && res.data && res.data.code === 0) {
+              this.records = []
+              for (let i = 0; i < res.data.records.length; i++) {
+                this.records.push(res.data.records[i])
+              }
+              console.log("current record")
+              console.log(this.records)
+            } else {
+              this.$notify({
+                title: "Error",
+                message: "unable to get results, please refresh this page",
+                duration: 2000,
+                type: "error"
+              })
+              clearInterval(this.timer)
+            }
+          }
+      )
     }
   },
   data() {
     return {
+      timer: null,
       backend: Common.addr,
       cur_name: 'first',
       lan: '',
@@ -178,24 +210,35 @@ export default {
     }
   },
   created() {
-    //this.value = marked(this.value)
+    this.timer = setInterval(() => {
+      console.log("timer")
+      this.refresh()
+    }, 5000);
   },
   beforeMount() {
     //console.log(this.$route.query.problem_id)
     axios.getProblemDetails({
       "problem_id": this.$route.query.problem_id
     }).then((res) => {
-      console.log(res.data)
-      this.value = marked(res.data.description)
-    })
-    axios.getResultList({
-      "problem_id": this.$route.query.problem_id
-    }).then((res) => {
-      for (let i = 0; i < res.data.length; i++) {
-        this.records.push(res.data[i])
+      // console.log(res.data)
+      if (res && res.status === 200 && res.data && res.data.code === 0) {
+        this.value = marked(res.data.description)
+      } else {
+        this.$notify({
+          title:"Error",
+          type:"error",
+          message: "unable to get problem description, please refresh the page",
+          duration: 2000,
+
+        })
       }
     })
+    this.refresh()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
+
 
 }
 </script>

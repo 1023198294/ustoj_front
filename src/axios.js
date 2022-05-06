@@ -5,7 +5,8 @@ import router from './router'
 import config from './components/config/config.json'
 //创建 axios 实例
 let instance = axios.create({
-    baseURL: config["backend_address_mock"],
+    // baseURL: config["backend_address_mock"],
+    baseURL: config["backend_address"],
     timeout: 5000, // 请求超过5秒即超时返回错误
     headers: {'Content-Type': 'application/json;charset=UTF-8'},
 })
@@ -14,9 +15,9 @@ instance.interceptors.request.use(
     config => {
         if (store.getters.token) { // 若存在token，则每个Http Header都加上token
             config.headers.Authorization = `${store.getters.token}`
-            console.log('拿到token')
+            // console.log('拿到token')
         }
-        console.log('request请求配置', config)
+        // console.log('request请求配置', config)
         return config
     },
     err => {
@@ -26,7 +27,7 @@ instance.interceptors.request.use(
 // http response 拦截器
 instance.interceptors.response.use(
     response => {
-        console.log('成功响应：', response)
+        // console.log('成功响应：', response)
         return response
     },
     error => {
@@ -43,8 +44,8 @@ instance.interceptors.response.use(
                     })
                     break
                 default:
-                    console.log('服务器出错，请稍后重试！')
-                    alert('服务器出错，请稍后重试！')
+                    // console.log('服务器出错，请稍后重试！')
+                    alert('Server Error! Please try it later! ')
             }
         }
         return Promise.reject(error.response) // 返回接口返回的错误信息
@@ -60,10 +61,6 @@ export default {
     userRegister(data) {
         return instance.post('/register', data)
     },
-    // 注册
-    userRegister2(data) {
-        return instance.post('/api/register', data)
-    },
     // 登录
     userLogin(data) {
         return instance.post('/login', data)
@@ -78,20 +75,37 @@ export default {
     },
     // 获取题目
     getProblems(data) {
-        return instance.get('/problem_list', data)
+
+        return instance.get(this.getFullUrl('/problem_list', data))
     },
     // 获取题目细节
     getProblemDetails(data) {
-        return instance.get('/problem_detail', data)
+        return instance.get(this.getFullUrl('/problem_detail', data))
     },
     getResultList(data) {
-        return instance.get('/result_list', data)
+        return instance.get(this.getFullUrl('/result_list', data))
     },
     getSubmit(data) {
-        return instance.get('/submit', data)
+        return instance.post('/submit', data)
     },
     // 删除用户
     delUser(data) {
         return instance.post('/api/deluser', data)
+    },
+
+    getFullUrl(url, data) {
+        let res = url + '?';
+        let change = false
+        for (const key in data) {
+            change = true
+            res = res + key + '=' + data[key] + "&"
+        }
+        // if (data.length > 0) {
+        //     res = res.slice(0, res.length)
+        // }
+        if (change) {
+            res = res.slice(0,res.length-1)
+        }
+        return res
     }
 }

@@ -185,8 +185,8 @@ export default {
               // console.log(res.data.code)
               if (res.data && res.data.code === 0) {
                 this.$notify({
-                  title: '成功',
-                  message: '注册成功。',
+                  title: 'Success',
+                  message: 'register success',
                   duration: 2000,
                   type: 'success'
                 })
@@ -197,7 +197,7 @@ export default {
                 }, 500)
               } else {
                 this.$notify({
-                  title: '错误',
+                  title: 'Error',
                   message: res.data.msg,
                   duration: 2000,
                   type: 'error'
@@ -205,8 +205,8 @@ export default {
               }
             } else {
               this.$notify({
-                title: '错误',
-                message: `服务器请求出错， 错误码${res.status}`,
+                title: 'Error',
+                message: `Server error, error code${res.status}`,
                 duration: 2000,
                 type: 'error'
               })

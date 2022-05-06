@@ -1,6 +1,6 @@
 {
   "jwt_token": "ydhnwbsecret",
-  "backend_address": "127.0.0.1",
+  "backend_address": "http://127.0.0.1:8080/api/v1/user",
   "backend_address_mock": "http://127.0.0.1:4523/mock/932561",
   "front_port": "9627"
 }

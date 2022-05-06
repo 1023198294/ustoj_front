@@ -41,7 +41,7 @@ export default {
           this.tableData = res.data.result;
         } else {
           this.$notify({
-            title: "错误",
+            title: "Error",
             message: res.data.msg,
             duration: 2000,
             type: "error"
@@ -58,7 +58,7 @@ export default {
         .then(res => {
           if (res.status === 200 && res.data && res.data.code === 0) {
             this.$notify({
-              title: "成功",
+              title: "Success",
               message: res.data.msg,
               duration: 2000,
               type: "error"
@@ -68,7 +68,7 @@ export default {
             );
           } else {
             this.$notify({
-              title: "错误",
+              title: "Error",
               message: res.data.msg,
               duration: 2000,
               type: "error"

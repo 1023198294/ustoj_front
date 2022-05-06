@@ -38,7 +38,7 @@
           style="width: 100%"
           @selection-change="handleSelectionChange">
         <el-table-column
-            prop="title"
+            prop="problem_name"
             label="title"
             width="180"
             align="left">
@@ -105,7 +105,7 @@ export default {
     },
     handleOperate(ele) {
       this.$router.push({
-        path: '/problem/problem_detail?problem_id='+ele.id,
+        path: '/problem/problem_detail?problem_id=' + ele.problem_id,
       })
     },
     handleDelete() {
@@ -140,9 +140,19 @@ export default {
         "page_size": this.pageSize
       }).then((res) => {
         // console.log(res.data)
-        for (let i = 0; i < res.data.length; i++) {
-          this.tableData.push(res.data[i])
+        if (res.status === 200 && res.data && res.data.code === 0) {
+          for (let i = 0; i < res.data.problemlist.length; i++) {
+            this.tableData.push(res.data.problemlist[i])
+          }
+        } else {
+          this.$notify({
+            title: "error",
+            message: "unable to load the problems",
+            duration: 2000,
+            type: "error"
+          })
         }
+
       })
     }
   }
