@@ -40,7 +40,7 @@ const router = new Router({
         },
         {
             path: '/',
-            redirect: '/dashboard',
+            redirect: '/problem',
             name: 'Full',
             component: Full,
             meta: {
