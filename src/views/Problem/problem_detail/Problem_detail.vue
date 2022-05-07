@@ -75,7 +75,7 @@ export default {
   methods: {
     // eslint-disable-next-line no-unused-vars
     tableRowClassName({row, _}) {
-      if (row.status === "running") {
+      if (row.status === "running" || row.status === "submitted") {
         return 'warning-row'
       } else if (row.status === "wrong answer") {
         return 'fail-row'
