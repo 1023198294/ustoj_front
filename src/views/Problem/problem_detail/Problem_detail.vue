@@ -79,7 +79,7 @@ export default {
         return 'warning-row'
       } else if (row.status === "wrong answer") {
         return 'fail-row'
-      } else if (row.status === "done")
+      } else if (row.status === "done" || row.status === "accepted")
         return 'success-row'
       return '';
     },
