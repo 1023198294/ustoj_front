@@ -108,6 +108,8 @@ export default {
         if (res) {
           if (res.status === 200 && res.data && res.data.code === 0) {
             this.submit_loading = false
+            this.toTop()
+            this.cur_name = 'second'
             this.refresh()
           } else {
             this.$notify({
@@ -120,6 +122,16 @@ export default {
           }
         }
       })
+    },
+    toTop() {
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // 实现滚动效果
+      const timeTop = setInterval(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+        if (top <= 0) {
+          clearInterval(timeTop);
+        }
+      }, 10)
     },
     refresh() {
       axios.getResultList({
