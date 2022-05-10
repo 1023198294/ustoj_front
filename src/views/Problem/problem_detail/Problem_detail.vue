@@ -201,13 +201,8 @@ export default {
           "\n" +
           "if __name__ == '__main__':\n" +
           "    args = sys.argv[1:]\n" +
-          "    # sample\n" +
-          "    tcase = int(args[0])\n" +
-          "    for i in range(tcase):\n" +
-          "        # a, b = map(int, input().strip().split())\n" +
-          "        a = int(args[i+1])\n" +
-          "        b = int(args[i+2])\n" +
-          "        print(a + b)",
+          "    result = int(args[0]) + int(args[1])\n" +
+          "    print(result)",
       value: '',
       language: '',
       submit_loading: false
